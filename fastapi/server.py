@@ -1,17 +1,15 @@
-from fastapi import FastAPI, Depends, HTTPException
+# server.py
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, Boolean, Text
 from sqlalchemy.ext.declarative import declarative_base
-from models import Item 
 from sqlalchemy.orm import sessionmaker
-from pydantic import BaseModel
 import pandas as pd
+
 
 app = FastAPI()
 
-# Load data from CSV
-csv_path = "data.csv"
-df = pd.read_csv(csv_path)
+
 
 # SQLAlchemy models
 Base = declarative_base()
@@ -40,11 +38,65 @@ class Item(Base):
 # Set up a connection to the database
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
-Base.metadata.create_all(bind=engine)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# FastAPI route to serve the dataset
 @app.get("/")
+def read_root():
+    return {"message": "Welcome to the FastAPI application!"}
+
+# FastAPI route to load data from CSV into the database
+
+@app.get("/load-data")
+def load_data():
+    try:
+        # Load data from CSV
+        csv_path = "data.csv"
+        df = pd.read_csv(csv_path)
+
+        # Print CSV file information
+        print("CSV file loaded successfully.")
+        print(f"Columns: {df.columns}")
+        print(f"Number of rows: {len(df)}")
+
+        # Create tables in the database
+        Base.metadata.create_all(bind=engine)
+        print("Database tables created.")
+
+        # Open a database session
+        db = SessionLocal()
+
+        # Insert data into the database
+        for _, row in df.iterrows():
+            item = Item(**row.to_dict())
+            db.add(item)
+
+        # Commit the changes
+        db.commit()
+
+        print("Data inserted into the database successfully.")
+
+        # Close the database session
+        db.close()
+
+        return {"status": "Data loaded successfully!"}
+
+    except Exception as e:
+        return {"status": "Error", "error_message": str(e)}
+
+# FastAPI health check endpoint
+@app.get("/health")
+def health_check():
+    try:
+        # Check if the SQLite database is accessible
+        db = SessionLocal()
+        db.execute("SELECT 1")
+        db.close()
+        return {"status": "OK"}
+    except Exception as e:
+        return {"status": "Error", "error_message": str(e)}
+
+# FastAPI route to serve the dataset
+@app.get("/items")
 def read_data():
     # Fetch data from the database using SQLAlchemy
     db = SessionLocal()
