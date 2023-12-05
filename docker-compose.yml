@@ -1,0 +1,36 @@
+# docker-compose.yml
+version: "3.8"
+
+services:
+  fastapi:
+    build:
+      context: ./fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    networks:
+      - mynetwork
+
+  streamlit:
+    build:
+      context: ./streamlit
+    ports:
+      - "8501:8501"
+    depends_on:
+      - fastapi
+    networks:
+      - mynetwork
+
+  database:
+    image: "postgres:13"
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+  
