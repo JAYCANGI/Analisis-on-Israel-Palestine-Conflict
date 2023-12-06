@@ -1,21 +1,15 @@
-# fastapi/Dockerfile
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
+FROM tiangolo/uvicorn-gunicorn
 
-# Set the working directory
-WORKDIR /app
+RUN mkdir /fastapi
 
-# Copy the dependencies file to the working directory
-COPY ./requirements.txt .
+COPY requirements.txt /fastapi
 
-# Install any dependencies
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+WORKDIR /fastapi
 
-# Copy the content of the local src directory to the working directory
-COPY . .
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Expose port 8000 for the FastAPI application
+COPY . /fastapi
+
 EXPOSE 8000
 
-# Command to run the application
 CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]
