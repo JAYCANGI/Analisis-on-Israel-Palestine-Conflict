@@ -1,23 +1,30 @@
-version: "3.8"
+version: '3'
 
 services:
   fastapi:
-    build:
-      context: ./fastapi
+    build: ./fastapi
     ports:
       - "8000:8000"
     networks:
-      - mynetwork
-
+      - deploy_network
+    container_name: fastapi
+    volumes:
+      - mis_datos:/app/data
   streamlit:
-    build:
-      context: ./streamlit
-    ports:
-      - "8501:8501"
+    build: ./streamlit
     depends_on:
       - fastapi
+    ports:
+      - "8501:8501"
     networks:
-      - mynetwork
+      - deploy_network
+    container_name: streamlit
+    volumes:
+      - mis_datos:/app/data
 
 networks:
-  mynetwork:
+  deploy_network:
+    driver: bridge
+
+volumes:
+  mis_datos:
