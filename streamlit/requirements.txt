@@ -1,3 +1,10 @@
-streamlit
-altair
+streamlit>=1.27.1
+requests
 pandas
+matplotlib
+seaborn
+wordcloud
+pydeck
+streamlit-folium
+folium
+numpy
