@@ -5,13 +5,13 @@ import pandas as pd
 import main_page, demographics, geospatial
 
 PAGES = {
-    "Main": main_page,
-    "Demographic Analysis": demographics,
-    "Geospatial Analysis": geospatial,
+    "Inicio 🏠 ": main_page,
+    "Análisis Demográfico 🫂": demographics,
+    "Análisis Geográfico 🌍": geospatial,
     }
 
 def main():
-    st.sidebar.title('Navigation')
+    st.sidebar.title('Navegación')
     response = requests.get("http://fastapi:8000/items")
     data = response.json()
     df = pd.DataFrame(data)

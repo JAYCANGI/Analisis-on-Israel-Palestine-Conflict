@@ -1,4 +1,4 @@
-streamlit>=1.27.1
+streamlit
 requests
 pandas
 matplotlib
@@ -8,3 +8,5 @@ pydeck
 streamlit-folium
 folium
 numpy
+plotly
+plotly.express

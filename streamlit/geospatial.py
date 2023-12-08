@@ -3,22 +3,21 @@ import folium
 import numpy as np
 
 def app(df):
-        # Analisis Geoespacial
-    st.subheader('Analisis Geoespacial')
+    # Analisis Geográfico
+    st.header('Analisis Geográfico')
 
     def get_color(fatalities):
-        if fatalities > 500:
+        if fatalities > 5000:
             return 'darkred'
-        elif fatalities > 100:
+        elif fatalities > 1000:
             return 'red'
-        elif fatalities > 50:
+        elif fatalities > 500:
             return 'orange'
         else:
             return 'green'
 
 
-    # Geospatial Analysis
-    st.subheader('Geospatial Analysis')
+    
 
     # Create a base map centered around the region
     district_coords = {
@@ -49,8 +48,8 @@ def app(df):
         ).add_to(my_map)
         folium.Circle(
             location=coords,
-            radius=np.sqrt(fatalities) * 100,  # scale radius for better visualization
-            color=get_color(fatalities),  # Assuming get_color is defined elsewhere
+            radius=np.sqrt(fatalities) * 100,  
+            color=get_color(fatalities),  
             fill=True,
             fill_color=get_color(fatalities),
             fill_opacity=0.6,
@@ -61,3 +60,21 @@ def app(df):
 
     # Use Streamlit to display the map
     st.components.v1.html(map_html, width=800, height=400, scrolling=True)
+
+    st.write("""
+    Este mapa representa la distribución geográfica de las fatalidades por distrito. Cada círculo representa un distrito, 
+    y su tamaño es proporcional a la cantidad de fatalidades en ese distrito. El color de cada círculo representa la cantidad 
+    de fatalidades, con un gradiente de verde a rojo oscuro.
+    """)
+
+    # Display the results of the attacks per district
+    results = district_fatalities.reset_index()
+    results.columns = ['district', 'fatalities']
+    
+    st.subheader('Número de fatalidades por distrito')
+    # Create four columns for the results
+    cols = st.columns(4)
+    for i in range(len(results)):
+        with cols[i % 4]:  # Use modulus operation to cycle through the four columns
+            cols[i % 4].subheader(f"{results.iloc[i, 0]}")
+            st.info(f"{results.iloc[i, 1]} ")
