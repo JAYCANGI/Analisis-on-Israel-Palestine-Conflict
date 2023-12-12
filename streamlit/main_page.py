@@ -4,10 +4,9 @@ import matplotlib.pyplot as plt
 import streamlit.components.v1 as components
 
 # Establecer la configuración de la página al inicio de tu script principal
-st.set_page_config(page_title="Análisis del Conflicto")
+st.set_page_config(page_title="Análisis del Conflicto",page_icon="🚀",layout='wide')
 
 def app(df):
-
     # CSS para personalizar el banner
     banner_css = """
     <style>

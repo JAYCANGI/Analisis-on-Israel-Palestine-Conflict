@@ -6,11 +6,8 @@ import pandas as pd
 import numpy as np
 
 def app(df):
-    
-    # Set a subheader
+      
     st.title('Analisis Demográfico')
-
-    # Create a select box for the tabs
     tab = st.selectbox('Seleccione una Distribución', ['Distribución de Edad', 'Distribución de Género', 'Distribución de Nacionalidad'])
 
     if tab == 'Distribución de Edad':
@@ -55,13 +52,13 @@ def app(df):
             Este gráfico representa la distribución de género. 
             Las barras azules representan al género masculino, mientras que las barras rosadas representan al género femenino.
             """)
-            # Calculate the percentages for each citizenship
+            
             gender_counts['percentage'] = (gender_counts['count'] / gender_counts['count'].sum()) * 100
 
-            # Create a DataFrame with the percentages for each nationality
+           
             results = gender_counts[['gender', 'percentage']]
 
-            # Display the results as an st.info and separate them by columns
+           
             cols = st.columns(len(results))
             for i in range(len(results)):
                 with cols[i]:
@@ -76,7 +73,7 @@ def app(df):
         citizenship_counts = df['citizenship'].value_counts().reset_index()
         citizenship_counts.columns = ['citizenship', 'count']
 
-        # Define the color for each citizenship
+        
         color_discrete_map = {'Palestinian': '#e6685b', 'Israel': '#74a5ea', 'America': '#feffff', 'Jordan': '#90ee9f'} 
 
         fig = px.bar(citizenship_counts, x='citizenship', y='count', color='citizenship', color_discrete_map=color_discrete_map) 
@@ -87,13 +84,13 @@ def app(df):
         Cada nacionalidad se representa con un color único.
         """)
 
-        # Calculate the percentages for each citizenship
+        
         citizenship_counts['percentage'] = (citizenship_counts['count'] / citizenship_counts['count'].sum()) * 100
 
-        # Create a DataFrame with the percentages for each nationality
+        
         results = citizenship_counts[['citizenship', 'percentage']]
 
-        # Display the results as an st.info and separate them by columns
+        
         cols = st.columns(len(results))
         for i in range(len(results)):
             with cols[i]:
