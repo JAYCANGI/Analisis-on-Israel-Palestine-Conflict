@@ -53,6 +53,6 @@ El uso de la aplicación es bastante sencilla. Para visualizar la aplicación de
 
 **Contribuciones**
 
-Querria aprovechar este espacio para expresar mi gratitud a WILLIAN OLIVEIRA GIBIN y a ASANICZKA (colaboradores de Kaggle), por recoger los datos necesarios para porder haber hecho el analisis sore la guerra entre Israel y Palestina.
+Queria aprovechar este espacio para expresar mi gratitud a WILLIAN OLIVEIRA GIBIN y a ASANICZKA (colaboradores de Kaggle), por recoger los datos necesarios para porder haber hecho el analisis sore la guerra entre Israel y Palestina.
 
-Adjuntoo link a su pagina de Kaggle - https://www.kaggle.com/datasets/willianoliveiragibin/fatalities-in-the-israeli-palestinian
+Adjunto link a su pagina de Kaggle - https://www.kaggle.com/datasets/willianoliveiragibin/fatalities-in-the-israeli-palestinian

@@ -1,6 +1,7 @@
 import streamlit as st
 
 def app(df):
+    st.header('Formulario para recopilación de datos adicionales')
     st.sidebar.success("En este apartado podrás enviar datos adicionales sobre fatalidades en el conflicto entre Israel y Palestina.")
     st.sidebar.success('IMPORTANTE: Los datos deben de ser respaldados por una fuente fiable')
 

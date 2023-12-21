@@ -46,7 +46,42 @@ def app(df):
 
     st.markdown("""
     <div style="text-align: center">
-    En esta practica final de la asignatura de Programación II he realizado el analisis de los datos recogidos por WILLIAN OLIVEIRA GIBIN, de funetes de televisión y redes sociales. El objetivo de este analisis es exponer la verdad sobre los sucesos ocurridos en el estado de Palestina.
+    Este proyecto es una aplicación web desarrollada con el objetivo de analizar y visualizar las incidencias ocurridas en el conflicto entre Israel y Palestina desde el año 		2004 hasta 2023. La aplicación está construida utilizando SQLalchemy, FastAPI, y Streamlit, y se centra en ofrecer un análisis detallado sobre diversos aspectos del 			conflicto.
+
+
+    <h2>Objetivo</h2>
+
+    El propósito principal de esta práctica final es proporcionar un entendimiento profundo de las repercusiones del conflicto, analizando los datos desde perspectivas demográficas y geográficas.
+
+    <h2>Secciones</h2>
+
+    <h3>Análisis Demográfico</h3>
+
+    En esta sección, la aplicación examina varios aspectos demográficos relacionados con las incidencias:
+
+    - Distribución de edad entre los afectados.
+    - Comparativa porcentual entre hombres y mujeres afectados.
+    - Clasificación por nacionalidades de los afectados.
+    
+    Esta parte del análisis permite comprender mejor quiénes han sido los más impactados por el conflicto y de qué manera.
+
+    <h3>Análisis Geográfico</h3>
+
+    La segunda parte se enfoca en el análisis geográfico:
+
+    - Representación en un mapa interactivo de los conflictos por distrito.
+    - Visualización evolutiva por región a lo largo de los años.
+    
+    Esta visualización interactiva facilita la comprensión de la distribución y evolución geográfica del conflicto.
+
+    <h2>Tecnologías Utilizadas</h2>
+
+    **SQLalchemy:** Utilizado para la gestión y consulta de la base de datos.
+
+    **FastAPI:** Empleado para crear una API robusta y eficiente.
+
+    **Streamlit:** Usado para desarrollar la interfaz de usuario interactiva.
+    
     </div>
     """, unsafe_allow_html=True)
 
