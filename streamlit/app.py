@@ -2,12 +2,13 @@
 import streamlit as st
 import requests
 import pandas as pd
-import main_page, demographics, geospatial
+import main_page, demografico, geografico,formulario
 
 PAGES = {
     "Inicio 🏠 ": main_page,
-    "Análisis Demográfico 🫂": demographics,
-    "Análisis Geográfico 🌍": geospatial,
+    "Análisis Demográfico 🫂": demografico,
+    "Análisis Geográfico 🌍": geografico,
+    "Formulario 🧾": formulario,
     }
 
 def main():
