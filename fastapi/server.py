@@ -14,7 +14,7 @@ app = FastAPI()
 
 
 
-# SQLAlchemy models
+# Models de SQLAlchemy 
 Base = declarative_base()
 
 class Item(Base):
@@ -39,13 +39,13 @@ class Item(Base):
     notes = Column(Text)
 
     def __init__(self, **data):
-        print(data)  # Add this line to print the data
+        print(data) 
         valid_data = {k: v for k, v in data.items() if k not in {'Unnamed: 16'}}
         super().__init__(**valid_data)
 
     
 
-# Set up a connection to the database
+# Connectamos con la base de datos
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -55,17 +55,16 @@ def read_root():
     return {"message": "Welcome to the FastAPI application!"}
 
 
-# FastAPI route to load data from CSV into the database
-# FastAPI route to load data from CSV into the database
+#Cargamos los daos
 @app.get("/load-data")
 def load_data():
     try:
-        # Load data from CSV excluding any unnamed columns
+       
         csv_path = "data.csv"
-        df = pd.read_csv(csv_path, index_col=0)  # Assuming the index is in the first column
+        df = pd.read_csv(csv_path, index_col=0)  
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
-        # Rename columns to match the Item model attributes
+        #Renombramos las columnas usando el BaseModel
         df = df.rename(columns={
             "Name": "name",
             "Date of Event": "date_of_event",
@@ -85,24 +84,21 @@ def load_data():
             "Notes": "notes"
         })
 
-        # Convert date columns to datetime objects
+    
         date_columns = ["date_of_event", "date_of_death"]
         for col in date_columns:
             df[col] = pd.to_datetime(df[col], errors='coerce')
 
-        # Print CSV file information
         print("CSV file loaded successfully.")
         print(f"Columns: {df.columns}")
         print(f"Number of rows: {len(df)}")
-
-        # Create tables in the database
+       
         Base.metadata.create_all(bind=engine)
         print("Database tables created.")
 
-        # Open a database session
         db = SessionLocal()
 
-        # Insert data into the database
+        #Insertamos los datos a la base de datos
         for idx, row in df.iterrows():
             try:
                 item = Item(**row.to_dict())
@@ -110,12 +106,10 @@ def load_data():
             except Exception as e:
                 print(f"Error inserting data at index {idx}: {str(e)}")
 
-        # Commit the changes
         db.commit()
 
         print("Data inserted into the database successfully.")
 
-        # Close the database session
         db.close()
 
         return {"status": "Data loaded successfully!"}
@@ -124,11 +118,11 @@ def load_data():
         return {"status": "Error", "error_message": str(e)}
 
 
-# FastAPI health check endpoint
+# Funcion para comprobar salud de FastAPI 
 @app.get("/health")
 def health_check():
     try:
-        # Check if the SQLite database is accessible
+        # Comprobar si la base de datos de SQLITE esta accesible
         db = SessionLocal()
         db.execute("SELECT 1")
         db.close()
@@ -136,16 +130,14 @@ def health_check():
     except Exception as e:
         return {"status": "Error", "error_message": str(e)}
 
-# FastAPI route to serve the dataset
-# FastAPI route to serve the dataset
+#Función para enlazar Fastapi y la Base de datos
 @app.get("/items")
 def read_data():
-    # Fetch data from the database using SQLAlchemy
     db = SessionLocal()
     data = db.query(Item).all()
     db.close()
 
-    # Convert data to JSON, converting datetime objects to strings
+    #Convertimos los datos en un formato JSON
     response_data = [
         {
             "id": item.id,

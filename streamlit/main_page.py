@@ -45,7 +45,7 @@ def app(df):
     st.markdown("&nbsp;", unsafe_allow_html=True)
 
     st.markdown("""
-    <div style="text-align: center">
+    <div>
     Este proyecto es una aplicación web desarrollada con el objetivo de analizar y visualizar las incidencias ocurridas en el conflicto entre Israel y Palestina desde el año 		2004 hasta 2023. La aplicación está construida utilizando SQLalchemy, FastAPI, y Streamlit, y se centra en ofrecer un análisis detallado sobre diversos aspectos del 			conflicto.
 
 
