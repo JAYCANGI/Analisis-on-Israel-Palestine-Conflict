@@ -4,6 +4,7 @@ import numpy as np
 import plotly.express as px
 import pandas as pd
 
+
 def app(df):
     # Analisis Geográfico
     st.header('Analisis Geográfico')
@@ -86,34 +87,19 @@ def app(df):
                 st.info(f"{results.iloc[i, 1]} ")
 
     elif tab == 'Gráfico de incidencias por regiones según el año ':
-       
-        df['date_of_event'] = pd.to_datetime(df['date_of_event'])
 
-        
+        df['date_of_event'] = pd.to_datetime(df['date_of_event'])
         df['year'] = df['date_of_event'].dt.year
 
-        # Agrupamos por año y región
-        year_region_fatalities = df.groupby(['year', 'event_location_region']).size().unstack(fill_value=0).reset_index()
-        
-        year_region_fatalities_melted = pd.melt(year_region_fatalities, id_vars=['year'], var_name='Region', value_name='Fatalities')
-       
+        # Aggregate data by year and region
+        aggregated_data = df.groupby(['year', 'event_location_region']).size().reset_index(name='Fatalities')
+
         st.title('Fatalidades durante los años por regiones')
-               
-        region_options = ['All'] + list(year_region_fatalities_melted['Region'].unique())
-        selected_region = st.selectbox('Selecciona la región', region_options)
 
-        if selected_region == 'All':
-            filtered_data = year_region_fatalities_melted
-            title = 'Fatalidades durante los años Todos'
-        else:
-            filtered_data = year_region_fatalities_melted[year_region_fatalities_melted['Region'] == selected_region]
-            title = f'Fatalidades durante los años  {selected_region}'
-
-    
-        fig = px.line(filtered_data, x='year', y='Fatalities', color='Region',
+        # Plotting aggregated data
+        fig = px.line(aggregated_data, x='year', y='Fatalities', color='event_location_region',
                     labels={'year': 'Year', 'Fatalities': 'Number of Fatalities'},
-                    title=title)
+                    title='Fatalidades durante los años Todos')
         fig.update_xaxes(tickangle=45)
 
-        
         st.plotly_chart(fig)

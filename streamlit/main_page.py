@@ -19,14 +19,16 @@ def app(df):
     color: white;
     text-align: center;
     }
-    
+  
     </style>
     """
+
+   
     st.markdown(banner_css, unsafe_allow_html=True)
 
     banner_html = """
     <div class="banner">
-    <h1>🇮🇱 Análisis del conflicto entre Israel y Palestina 🇵🇸</h1>
+    <h1>Análisis del conflicto entre Israel y Palestina</h1>
     </div>
     """
     st.markdown(banner_html, unsafe_allow_html=True)
@@ -45,44 +47,28 @@ def app(df):
     st.markdown("&nbsp;", unsafe_allow_html=True)
 
     st.markdown("""
+    <style>
+    div, h2, h3, strong {
+        text-align: center; 
+    }
+    </style>
+
     <div>
-    Este proyecto es una aplicación web desarrollada con el objetivo de analizar y visualizar las incidencias ocurridas en el conflicto entre Israel y Palestina desde el año 		2004 hasta 2023. La aplicación está construida utilizando SQLalchemy, FastAPI, y Streamlit, y se centra en ofrecer un análisis detallado sobre diversos aspectos del 			conflicto.
-
-
-    <h2>Objetivo</h2>
-
-    El propósito principal de esta práctica final es proporcionar un entendimiento profundo de las repercusiones del conflicto, analizando los datos desde perspectivas demográficas y geográficas.
-
-    <h2>Secciones</h2>
-
-    <h3>Análisis Demográfico</h3>
-
-    En esta sección, la aplicación examina varios aspectos demográficos relacionados con las incidencias:
-
-    - Distribución de edad entre los afectados.
-    - Comparativa porcentual entre hombres y mujeres afectados.
-    - Clasificación por nacionalidades de los afectados.
-    
-    Esta parte del análisis permite comprender mejor quiénes han sido los más impactados por el conflicto y de qué manera.
-
-    <h3>Análisis Geográfico</h3>
-
-    La segunda parte se enfoca en el análisis geográfico:
-
-    - Representación en un mapa interactivo de los conflictos por distrito.
-    - Visualización evolutiva por región a lo largo de los años.
-    
-    Esta visualización interactiva facilita la comprensión de la distribución y evolución geográfica del conflicto.
-
-    <h2>Tecnologías Utilizadas</h2>
-
-    **SQLalchemy:** Utilizado para la gestión y consulta de la base de datos.
-
-    **FastAPI:** Empleado para crear una API robusta y eficiente.
-
-    **Streamlit:** Usado para desarrollar la interfaz de usuario interactiva.
-    
+        <p>Este proyecto es una aplicación web desarrollada con el objetivo de analizar y visualizar las incidencias ocurridas en el conflicto entre Israel y Palestina desde el 2004 hasta 2023.</p>
+        <h2><strong>Objetivo</strong></h2>
+        <p>El prop&oacute;sito principal de esta práctica final es proporcionar un entendimiento profundo de las repercusiones del conflicto, analizando los datos desde perspectivas demográficas y geográficas.</p>
+        <h2><strong>Secciones</strong></h2>
+        <h3>Análisis Demográfico</h3>
+        <p>En esta sección, la aplicación examina varios aspectos demográficos relacionados con las incidencias: - Distribución de edad entre los afectados. - Comparativa porcentual entre hombres y mujeres afectados. - Clasificación por nacionalidades de los afectados. Esta parte del análisis permite comprender mejor qui&eacute;nes han sido los más impactados por el conflicto y de qu&eacute; manera.</p>
+        <h3>Análisis Geográfico</h3>
+        <p>La segunda parte se enfoca en el análisis geográfico: - Representación en un mapa interactivo de los conflictos por distrito. - Visualización evolutiva por región a lo largo de los. Esta visualización interactiva facilita la comprensión de la distribución y evolución geográfica del conflicto.</p>
+        <h2><strong>Tecnolog&iacute;as Utilizadas</strong></h2>
+        <p><strong>SQLalchemy:</strong> Utilizado para la gestión y consulta de la base de datos.</p>
+        <p><strong>FastAPI:</strong> Empleado para crear una API robusta y eficiente.</p>
+        <p><strong>Streamlit:</strong> Usado para desarrollar la interfaz de usuario interactiva.</p>
     </div>
+
+
     """, unsafe_allow_html=True)
 
     
